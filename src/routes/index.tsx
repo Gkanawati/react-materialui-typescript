@@ -14,8 +14,6 @@ export const AppRoutes = () => {
           </Button>
         }
       />
-
-      {/* Redirect */}
       <Route path="*" element={<Navigate to="/pagina-inicial" />} />
     </Routes>
   );
