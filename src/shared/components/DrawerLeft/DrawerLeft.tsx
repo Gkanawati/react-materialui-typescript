@@ -12,7 +12,40 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { ReactNode } from "react";
+import { useMatch, useNavigate, useResolvedPath } from "react-router-dom";
 import { useDrawerContext } from "../../contexts";
+
+interface IListItemLinkProps {
+  to: string;
+  icon: string;
+  label: string;
+  onClick: (() => void) | undefined;
+}
+const ListItemLink: React.FC<IListItemLinkProps> = ({
+  to,
+  icon,
+  label,
+  onClick,
+}) => {
+  const navigate = useNavigate();
+
+  const resolvedPath = useResolvedPath(to);
+  const match = useMatch({ path: resolvedPath.pathname, end: false });
+
+  const handleClick = () => {
+    navigate(to);
+    onClick?.(); // => onClick && onClick()
+  };
+
+  return (
+    <ListItemButton onClick={handleClick} selected={!!match}>
+      <ListItemIcon>
+        <Icon>{icon}</Icon>
+      </ListItemIcon>
+      <ListItemText primary={label} />
+    </ListItemButton>
+  );
+};
 
 interface IDrawerLeftData {
   children: ReactNode;
@@ -22,7 +55,7 @@ export const DrawerLeft: React.FC<IDrawerLeftData> = ({ children }) => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
+  const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
 
   return (
     <>
@@ -55,12 +88,15 @@ export const DrawerLeft: React.FC<IDrawerLeftData> = ({ children }) => {
 
           <Box flex={1}>
             <List component="nav">
-              <ListItemButton>
-                <ListItemIcon>
-                  <Icon>home</Icon>
-                </ListItemIcon>
-                <ListItemText primary="Página Inicial" />
-              </ListItemButton>
+              {drawerOptions.map((drawerOption) => (
+                <ListItemLink
+                  key={drawerOption.path}
+                  icon={drawerOption.icon}
+                  label={drawerOption.label}
+                  to={drawerOption.path}
+                  onClick={smDown ? toggleDrawerOpen : undefined}
+                />
+              ))}
             </List>
           </Box>
         </Box>
