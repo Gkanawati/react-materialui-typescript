@@ -1,6 +1,36 @@
 import { Box, Button, Divider, Icon, Paper, useTheme } from "@mui/material";
 
-export const ToolsDetail: React.FC = () => {
+interface IToolsDetailProps {
+  textBtnNew?: string;
+
+  showBtnNew?: boolean;
+  showBtnBack?: boolean;
+  showBtnDelete?: boolean;
+  showBtnSave?: boolean;
+  showBtnSaveandBack?: boolean;
+
+  onClickInNew?: () => void;
+  onClickInBack?: () => void;
+  onClickInDelete?: () => void;
+  onClickInSave?: () => void;
+  onClickInSaveandBack?: () => void;
+}
+
+export const ToolsDetail: React.FC<IToolsDetailProps> = ({
+  textBtnNew = "Novo",
+
+  showBtnBack = true,
+  showBtnDelete = true,
+  showBtnNew = true,
+  showBtnSave = true,
+  showBtnSaveandBack = false,
+
+  onClickInBack,
+  onClickInDelete,
+  onClickInNew,
+  onClickInSave,
+  onClickInSaveandBack,
+}) => {
   const theme = useTheme();
 
   return (
@@ -14,48 +44,67 @@ export const ToolsDetail: React.FC = () => {
       component={Paper}
       height={theme.spacing(5)}
     >
-      <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-        startIcon={<Icon>save</Icon>}
-      >
-        Salvar
-      </Button>
+      {showBtnSave && (
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={onClickInSave}
+          startIcon={<Icon>save</Icon>}
+        >
+          Salvar
+        </Button>
+      )}
 
-      <Button
-        variant="outlined"
-        color="primary"
-        disableElevation
-        startIcon={<Icon>save</Icon>}
-      >
-        Salvar e Voltar
-      </Button>
-      <Button
-        variant="outlined"
-        color="primary"
-        disableElevation
-        startIcon={<Icon>delete</Icon>}
-      >
-        Apagar
-      </Button>
-      <Button
-        variant="outlined"
-        color="primary"
-        disableElevation
-        startIcon={<Icon>add</Icon>}
-      >
-        Novo
-      </Button>
+      {showBtnSaveandBack && (
+        <Button
+          variant="outlined"
+          color="primary"
+          disableElevation
+          onClick={onClickInSaveandBack}
+          startIcon={<Icon>save</Icon>}
+        >
+          Salvar e Voltar
+        </Button>
+      )}
+
+      {showBtnDelete && (
+        <Button
+          variant="outlined"
+          color="primary"
+          disableElevation
+          onClick={onClickInDelete}
+          startIcon={<Icon>delete</Icon>}
+        >
+          Apagar
+        </Button>
+      )}
+
+      {showBtnNew && (
+        <Button
+          variant="outlined"
+          color="primary"
+          disableElevation
+          onClick={onClickInNew}
+          startIcon={<Icon>add</Icon>}
+        >
+          {textBtnNew}
+        </Button>
+      )}
+
       <Divider variant="middle" orientation="vertical" />
-      <Button
-        variant="outlined"
-        color="primary"
-        disableElevation
-        startIcon={<Icon>arrow_back</Icon>}
-      >
-        Voltar
-      </Button>
+
+      {showBtnBack && (
+        <Button
+          variant="outlined"
+          color="primary"
+          disableElevation
+          onClick={onClickInBack}
+          startIcon={<Icon>arrow_back</Icon>}
+        >
+          Voltar
+        </Button>
+      )}
     </Box>
   );
 };
