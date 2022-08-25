@@ -13,7 +13,7 @@ import {
 import { Box } from "@mui/system";
 import { ReactNode } from "react";
 import { useMatch, useNavigate, useResolvedPath } from "react-router-dom";
-import { useDrawerContext } from "../../contexts";
+import { useAppthemeContext, useDrawerContext } from "../../contexts";
 
 interface IListItemLinkProps {
   to: string;
@@ -56,6 +56,7 @@ export const DrawerLeft: React.FC<IDrawerLeftData> = ({ children }) => {
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
+  const { toggleTheme, themeName } = useAppthemeContext();
 
   return (
     <>
@@ -97,6 +98,21 @@ export const DrawerLeft: React.FC<IDrawerLeftData> = ({ children }) => {
                   onClick={smDown ? toggleDrawerOpen : undefined}
                 />
               ))}
+            </List>
+          </Box>
+
+          <Box>
+            <List component="nav">
+              <ListItemButton onClick={toggleTheme}>
+                <ListItemIcon>
+                  <Icon>
+                    {themeName === "dark" ? "light_mode" : "dark_mode"}
+                  </Icon>
+                </ListItemIcon>
+                <ListItemText
+                  primary={themeName === "dark" ? "Tema Claro" : "Tema Escuro"}
+                />
+              </ListItemButton>
             </List>
           </Box>
         </Box>
