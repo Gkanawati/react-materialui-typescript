@@ -1,12 +1,9 @@
-import { ToolsBar } from "../../shared/components";
+import { ToolsBar, ToolsDetail } from "../../shared/components";
 import { LayoutBase } from "../../shared/layouts";
 
 export const Dashboard = () => {
   return (
-    <LayoutBase
-      title="Página Inicial"
-      ToolsBar={<ToolsBar showInputSearch TextBtnNew="Nova" />}
-    >
+    <LayoutBase title="Página Inicial" ToolsBar={<ToolsDetail />}>
       Teste
     </LayoutBase>
   );
