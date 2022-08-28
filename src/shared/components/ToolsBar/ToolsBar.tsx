@@ -8,6 +8,8 @@ import {
   useTheme,
 } from "@mui/material";
 
+import { Environment } from "../../environment";
+
 interface IToolsBarProps {
   inputText?: string;
   showInputSearch?: boolean;
@@ -40,7 +42,7 @@ export const ToolsBar: React.FC<IToolsBarProps> = ({
       {showInputSearch && (
         <TextField
           size="small"
-          placeholder="Pesquisar..."
+          placeholder={Environment.INPUT_DE_BUSCA}
           value={inputText}
           onChange={(e) => onChangeInputText?.(e.target.value)}
           InputProps={{
