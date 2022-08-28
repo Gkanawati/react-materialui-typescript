@@ -1,5 +1,16 @@
-import { Box, Button, Divider, Icon, Paper, useTheme } from "@mui/material";
-
+/* eslint-disable indent */
+import {
+  Box,
+  Button,
+  Divider,
+  Icon,
+  Paper,
+  Skeleton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  Theme,
+} from "@mui/material";
 interface IToolsDetailProps {
   textBtnNew?: string;
 
@@ -8,6 +19,12 @@ interface IToolsDetailProps {
   showBtnDelete?: boolean;
   showBtnSave?: boolean;
   showBtnSaveandBack?: boolean;
+
+  showBtnNewLoading?: boolean;
+  showBtnBackLoading?: boolean;
+  showBtnDeleteLoading?: boolean;
+  showBtnSaveLoading?: boolean;
+  showBtnSaveandBackLoading?: boolean;
 
   onClickInNew?: () => void;
   onClickInBack?: () => void;
@@ -25,12 +42,20 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
   showBtnSave = true,
   showBtnSaveandBack = false,
 
+  showBtnBackLoading = false,
+  showBtnDeleteLoading = false,
+  showBtnNewLoading = false,
+  showBtnSaveLoading = false,
+  showBtnSaveandBackLoading = false,
+
   onClickInBack,
   onClickInDelete,
   onClickInNew,
   onClickInSave,
   onClickInSaveandBack,
 }) => {
+  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const mdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
   const theme = useTheme();
 
   return (
@@ -44,7 +69,7 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
       component={Paper}
       height={theme.spacing(5)}
     >
-      {showBtnSave && (
+      {showBtnSave && !showBtnSaveLoading && (
         <Button
           variant="contained"
           color="primary"
@@ -52,11 +77,19 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
           onClick={onClickInSave}
           startIcon={<Icon>save</Icon>}
         >
-          Salvar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Salvar
+          </Typography>
         </Button>
       )}
+      {showBtnSaveLoading && <Skeleton width={110} height={60} />}
 
-      {showBtnSaveandBack && (
+      {showBtnSaveandBack && !showBtnSaveandBackLoading && !mdDown && (
         <Button
           variant="outlined"
           color="primary"
@@ -64,11 +97,21 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
           onClick={onClickInSaveandBack}
           startIcon={<Icon>save</Icon>}
         >
-          Salvar e Voltar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Salvar e Voltar
+          </Typography>
         </Button>
       )}
+      {showBtnSaveandBackLoading && !mdDown && (
+        <Skeleton width={180} height={60} />
+      )}
 
-      {showBtnDelete && (
+      {showBtnDelete && !showBtnDeleteLoading && (
         <Button
           variant="outlined"
           color="primary"
@@ -76,11 +119,19 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
           onClick={onClickInDelete}
           startIcon={<Icon>delete</Icon>}
         >
-          Apagar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Apagar
+          </Typography>
         </Button>
       )}
+      {showBtnDeleteLoading && <Skeleton width={110} height={60} />}
 
-      {showBtnNew && (
+      {showBtnNew && !showBtnNewLoading && !smDown && (
         <Button
           variant="outlined"
           color="primary"
@@ -88,13 +139,24 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
           onClick={onClickInNew}
           startIcon={<Icon>add</Icon>}
         >
-          {textBtnNew}
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            {textBtnNew}
+          </Typography>
         </Button>
       )}
+      {showBtnNewLoading && !smDown && <Skeleton width={110} height={60} />}
 
-      <Divider variant="middle" orientation="vertical" />
+      {showBtnBack &&
+        (showBtnNew || showBtnDelete || showBtnSave || showBtnSaveandBack) && (
+          <Divider variant="middle" orientation="vertical" />
+        )}
 
-      {showBtnBack && (
+      {showBtnBack && !showBtnBackLoading && (
         <Button
           variant="outlined"
           color="primary"
@@ -102,9 +164,17 @@ export const ToolsDetail: React.FC<IToolsDetailProps> = ({
           onClick={onClickInBack}
           startIcon={<Icon>arrow_back</Icon>}
         >
-          Voltar
+          <Typography
+            variant="button"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
+            Voltar
+          </Typography>
         </Button>
       )}
+      {showBtnBackLoading && <Skeleton width={110} height={60} />}
     </Box>
   );
 };
