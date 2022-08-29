@@ -88,6 +88,7 @@ export const ListagemDePessoas: React.FC = () => {
           showInputSearch
           TextBtnNew="Nova"
           inputText={busca}
+          onClickNewBtn={() => navigate("/pessoas/detalhe/nova")}
           onChangeInputText={(text) =>
             setSearchParams({ busca: text, pagina: "1" }, { replace: true })
           }
