@@ -15,7 +15,7 @@ export const Environment = {
     /**
     *   Placeholder exibido nos inputs
     */
-    INPUT_DE_BUSCA: "Pesquisat...",
+    INPUT_DE_BUSCA: "Pesquisar...",
 
     /**
     *   Texto exibido quando nenhum registro é encontrado em uma listagem
