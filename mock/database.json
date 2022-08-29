@@ -1,8 +1,34 @@
 {
-    "pessoas": [{
+    "pessoas": [
+        {
         "id": 1,
-        "email": "Juca@email.com",
+        "email": "gabrielkanawati3@gmail.com",
+        "cidadeId": 1,
+        "nomeCompleto": "Gabriel Kanawati"
+          },
+        {
+        "id": 2,
+        "email": "biatodero@gmail.com",
+        "cidadeId": 1,
+        "nomeCompleto": "Ana Beatriz Todero Ferreira"
+          },
+        {
+        "id": 3,
+        "email": "jvduarte@gmail.com",
+        "cidadeId": 1,
+        "nomeCompleto": "Joao Duarte"
+          },
+        {
+        "id": 4,
+        "email": "fred@gmail.com",
+        "cidadeId": 1,
+        "nomeCompleto": "Fred"
+          },
+        {
+        "id": 5,
+        "email": "Juca@gmail.com",
         "cidadeId": 1,
         "nomeCompleto": "Juca Silva"
-    }]
+        }
+]
 }
