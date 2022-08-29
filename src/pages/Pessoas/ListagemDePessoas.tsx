@@ -62,7 +62,7 @@ export const ListagemDePessoas: React.FC = () => {
   }, [busca, pagina]);
 
   const handleDelete = (id: number) => {
-    if (confirm("Deseja apagar o resgistro?")) {
+    if (confirm("Deseja realmente deletar?")) {
       PessoasService.deleteById(id).then((result) => {
         if (result instanceof Error) {
           alert(result.message);
