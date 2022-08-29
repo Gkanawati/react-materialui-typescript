@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  Icon,
+  IconButton,
   LinearProgress,
   Pagination,
   Paper,
@@ -11,7 +13,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { ToolsBar } from "../../shared/components";
 import { useDebounce } from "../../shared/hooks";
@@ -25,6 +27,7 @@ import { Environment } from "../../shared/environment";
 export const ListagemDePessoas: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState<IListagemPessoa[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -58,6 +61,25 @@ export const ListagemDePessoas: React.FC = () => {
     });
   }, [busca, pagina]);
 
+  const handleDelete = (id: number) => {
+    if (confirm("Deseja apagar o resgistro?")) {
+      PessoasService.deleteById(id).then((result) => {
+        if (result instanceof Error) {
+          alert(result.message);
+        } else {
+          setRows((oldRows) => [
+            ...oldRows.filter((oldRow) => oldRow.id !== id),
+          ]);
+          // alert("Registro apagado com sucesso!");
+        }
+      });
+    }
+  };
+
+  const handleEdit = (id: number) => {
+    navigate(`/pessoas/detalhe/${id}`);
+  };
+
   return (
     <LayoutBase
       title="Listagem de pessoas"
@@ -80,18 +102,25 @@ export const ListagemDePessoas: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Ações</TableCell>
-              <TableCell>Nome Completo</TableCell>
               <TableCell>Email</TableCell>
+              <TableCell>Nome Completo</TableCell>
+              <TableCell>Ações</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id}>
-                <TableCell>-</TableCell>
                 <TableCell>{row.nomeCompleto}</TableCell>
                 <TableCell>{row.email}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleDelete(row.id)}>
+                    <Icon>delete</Icon>
+                  </IconButton>
+                  <IconButton onClick={() => handleEdit(row.id)}>
+                    <Icon>edit</Icon>
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
