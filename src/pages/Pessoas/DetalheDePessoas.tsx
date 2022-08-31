@@ -5,6 +5,8 @@ import { LayoutBase } from "../../shared/layouts";
 import { ToolsDetail } from "../../shared/components";
 import { useEffect, useState } from "react";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
+import { Form } from "@unform/web";
+import { VTextField } from "../../shared/forms";
 
 export const DetalheDePessoas: React.FC = () => {
   const { id = "nova" } = useParams<"id">();
@@ -65,6 +67,12 @@ export const DetalheDePessoas: React.FC = () => {
     >
       {isLoading && <LinearProgress variant="indeterminate" />}
       <Typography>{id}</Typography>
+
+      <Form onSubmit={(data) => console.log(data)}>
+        <VTextField name="nomeCompleto" />
+
+        <button type="submit">Submit</button>
+      </Form>
     </LayoutBase>
   );
 };
