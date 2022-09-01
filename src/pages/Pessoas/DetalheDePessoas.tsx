@@ -1,16 +1,25 @@
-import { LinearProgress, Typography } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { LayoutBase } from "../../shared/layouts";
 import { ToolsDetail } from "../../shared/components";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
 import { Form } from "@unform/web";
 import { VTextField } from "../../shared/forms";
+import { FormHandles } from "@unform/core";
+
+interface IFormData {
+  email: string;
+  cidadeId: number;
+  nomeCompleto: string;
+}
 
 export const DetalheDePessoas: React.FC = () => {
   const { id = "nova" } = useParams<"id">();
   const navigate = useNavigate();
+
+  const formRef = useRef<FormHandles>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [nome, setNome] = useState("");
@@ -31,8 +40,8 @@ export const DetalheDePessoas: React.FC = () => {
     }
   }, [id]);
 
-  const handleSave = () => {
-    console.log("Save");
+  const handleSave = (dados: IFormData) => {
+    console.log(dados);
   };
 
   const handleDelete = (id: number) => {
@@ -58,21 +67,43 @@ export const DetalheDePessoas: React.FC = () => {
           showBtnNew={id !== "nova"}
           showBtnDelete={id !== "nova"}
           onClickInDelete={() => handleDelete(Number(id))}
-          onClickInSave={() => handleSave}
-          onClickInSaveandBack={() => handleSave()}
+          onClickInSave={() => formRef.current?.submitForm()}
+          onClickInSaveandBack={() => formRef.current?.submitForm()}
           onClickInBack={() => navigate("/pessoas")}
           onClickInNew={() => navigate("/pessoas/detalhe/nova")}
         />
       }
     >
       {isLoading && <LinearProgress variant="indeterminate" />}
-      <Typography>{id}</Typography>
 
-      <Form onSubmit={(data) => console.log(data)}>
+      <Form ref={formRef} onSubmit={handleSave}>
         <VTextField name="nomeCompleto" />
-
-        <button type="submit">Submit</button>
+        <VTextField name="email" />
+        <VTextField name="cidadeId" />
       </Form>
     </LayoutBase>
   );
 };
+
+{
+  /* Para colocar objeto dentro do objeto da resposta do form => recebe como endereco {rua: , numero: } */
+}
+{
+  /* <VTextField name="endereco.rua" />
+        <VTextField name="endereco.numero" /> */
+}
+
+{
+  /* ou para usar como array => salvar varios enderecos  */
+}
+{
+  /* {[1, 2, 3, 4].map((_, index) => {
+          <Scope path={`endereco[${index}]`} key="">
+            <VTextField name={"rua"} />
+            <VTextField name={"numero"} />
+
+            ou (sem o Scope)
+            <VTextField name={`endereco[${index}].estado`} />
+          </Scope>
+        })} */
+}
