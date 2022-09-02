@@ -2,9 +2,9 @@
   "pessoas": [
     {
       "id": 1,
+      "nomeCompleto": "Gabriel Kanawati",
       "email": "gabrielkanawati3@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Gabriel Kanawati"
+      "cidadeId": 1
     },
     {
       "id": 2,
@@ -65,6 +65,12 @@
       "email": "joana@oulook.com",
       "cidadeId": "33",
       "id": 17
+    },
+    {
+      "id": 18,
+      "nomeCompleto": "Henrique Abreu",
+      "email": "henrique@gmail.com",
+      "cidadeId": "2"
     }
   ]
 }
