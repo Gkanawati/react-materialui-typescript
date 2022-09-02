@@ -20,9 +20,9 @@
     },
     {
       "id": 4,
+      "nomeCompleto": "Fred b12",
       "email": "fred@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Fred"
+      "cidadeId": 1
     },
     {
       "id": 8,
@@ -59,6 +59,12 @@
       "nomeCompleto": "Gabriel Loutfalla K. ",
       "email": "gabrielloutfalla@gmail.com",
       "cidadeId": "1"
+    },
+    {
+      "nomeCompleto": "Joana d'Arc",
+      "email": "joana@oulook.com",
+      "cidadeId": "33",
+      "id": 17
     }
   ]
 }
