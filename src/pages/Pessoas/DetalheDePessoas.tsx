@@ -1,13 +1,11 @@
-import { LinearProgress, Box, Paper, Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { LinearProgress, Box, Paper, Grid, Typography } from "@mui/material";
 
 import { LayoutBase } from "../../shared/layouts";
 import { ToolsDetail } from "../../shared/components";
-import { useEffect, useRef, useState } from "react";
 import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
-import { Form } from "@unform/web";
-import { VTextField } from "../../shared/forms";
-import { FormHandles } from "@unform/core";
+import { VForm, VTextField, useVForm } from "../../shared/forms";
 
 interface IFormData {
   email: string;
@@ -19,7 +17,7 @@ export const DetalheDePessoas: React.FC = () => {
   const { id = "nova" } = useParams<"id">();
   const navigate = useNavigate();
 
-  const formRef = useRef<FormHandles>(null);
+  const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
 
   const [isLoading, setIsLoading] = useState(false);
   const [nome, setNome] = useState("");
@@ -55,7 +53,11 @@ export const DetalheDePessoas: React.FC = () => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
-          navigate(`/pessoas/detalhe/${result}`);
+          if (isSaveAndClose()) {
+            navigate("/pessoas");
+          } else {
+            navigate(`/pessoas/detahe/${result}`);
+          }
         }
       });
     } else {
@@ -64,6 +66,10 @@ export const DetalheDePessoas: React.FC = () => {
           setIsLoading(false);
           if (result instanceof Error) {
             alert(result.message);
+          } else {
+            if (isSaveAndClose()) {
+              navigate("/pessoas");
+            }
           }
         }
       );
@@ -93,14 +99,14 @@ export const DetalheDePessoas: React.FC = () => {
           showBtnNew={id !== "nova"}
           showBtnDelete={id !== "nova"}
           onClickInDelete={() => handleDelete(Number(id))}
-          onClickInSave={() => formRef.current?.submitForm()}
-          onClickInSaveandBack={() => formRef.current?.submitForm()}
+          onClickInSave={save}
+          onClickInSaveandBack={saveAndClose}
           onClickInBack={() => navigate("/pessoas")}
           onClickInNew={() => navigate("/pessoas/detalhe/nova")}
         />
       }
     >
-      <Form ref={formRef} onSubmit={handleSave}>
+      <VForm ref={formRef} onSubmit={handleSave}>
         <Box
           margin={1}
           display="flex"
@@ -152,7 +158,7 @@ export const DetalheDePessoas: React.FC = () => {
             </Grid>
           </Grid>
         </Box>
-      </Form>
+      </VForm>
     </LayoutBase>
   );
 };
