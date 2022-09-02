@@ -28,20 +28,40 @@ export const DetalheDePessoas: React.FC = () => {
     if (id !== "nova") {
       setIsLoading(true);
       PessoasService.getById(Number(id)).then((result) => {
+        setIsLoading(false);
         if (result instanceof Error) {
           alert(result.message);
           navigate("/pessoas");
         } else {
           setNome(result.nomeCompleto);
           console.log(result);
-          setIsLoading(false);
+          formRef.current?.setData(result);
         }
       });
     }
   }, [id]);
 
   const handleSave = (dados: IFormData) => {
-    console.log(dados);
+    setIsLoading(true);
+    if (id == "nova") {
+      PessoasService.create(dados).then((result) => {
+        setIsLoading(false);
+        if (result instanceof Error) {
+          alert(result.message);
+        } else {
+          navigate(`/pessoas/detalhe/${result}`);
+        }
+      });
+    } else {
+      PessoasService.updateById(Number(id), { id: Number(id), ...dados }).then(
+        (result) => {
+          setIsLoading(false);
+          if (result instanceof Error) {
+            alert(result.message);
+          }
+        }
+      );
+    }
   };
 
   const handleDelete = (id: number) => {
@@ -77,9 +97,9 @@ export const DetalheDePessoas: React.FC = () => {
       {isLoading && <LinearProgress variant="indeterminate" />}
 
       <Form ref={formRef} onSubmit={handleSave}>
-        <VTextField name="nomeCompleto" />
-        <VTextField name="email" />
-        <VTextField name="cidadeId" />
+        <VTextField placeholder="Nome Completo" name="nomeCompleto" />
+        <VTextField placeholder="Email" name="email" />
+        <VTextField placeholder="Cidade" name="cidadeId" />
       </Form>
     </LayoutBase>
   );
