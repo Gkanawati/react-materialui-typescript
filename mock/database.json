@@ -61,16 +61,20 @@
       "cidadeId": "1"
     },
     {
-      "nomeCompleto": "Joana d'Arc",
-      "email": "joana@oulook.com",
-      "cidadeId": "33",
-      "id": 17
-    },
-    {
       "id": 18,
       "nomeCompleto": "Henrique Abreu",
       "email": "henrique@gmail.com",
       "cidadeId": "2"
+    }
+  ],
+  "cidades": [
+    {
+      "nome": "São João da Boa Vista",
+      "id": 1
+    },
+    {
+      "nome": "Aguaí",
+      "id": 2
     }
   ]
 }
