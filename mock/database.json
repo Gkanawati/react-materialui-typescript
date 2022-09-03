@@ -118,5 +118,8 @@
       "nome": "Porto Alegre",
       "id": 11
     }
-  ]
+  ],
+  "auth": {
+    "accessToken": "aaaaaaaa.bbbbbbbb.cccccccc"
+  }
 }
