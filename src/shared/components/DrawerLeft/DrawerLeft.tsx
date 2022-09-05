@@ -13,7 +13,11 @@ import {
 import { Box } from "@mui/system";
 import { ReactNode } from "react";
 import { useMatch, useNavigate, useResolvedPath } from "react-router-dom";
-import { useAppthemeContext, useDrawerContext } from "../../contexts";
+import {
+  useAppthemeContext,
+  useAuthContext,
+  useDrawerContext,
+} from "../../contexts";
 
 interface IListItemLinkProps {
   to: string;
@@ -57,6 +61,8 @@ export const DrawerLeft: React.FC<IDrawerLeftData> = ({ children }) => {
 
   const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
   const { toggleTheme, themeName } = useAppthemeContext();
+
+  const { logout } = useAuthContext();
 
   return (
     <>
@@ -103,6 +109,12 @@ export const DrawerLeft: React.FC<IDrawerLeftData> = ({ children }) => {
 
           <Box>
             <List component="nav">
+              <ListItemButton onClick={logout}>
+                <ListItemIcon>
+                  <Icon>logout</Icon>
+                </ListItemIcon>
+                <ListItemText primary="Sair" />
+              </ListItemButton>
               <ListItemButton onClick={toggleTheme}>
                 <ListItemIcon>
                   <Icon>
