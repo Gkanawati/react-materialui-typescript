@@ -2,12 +2,15 @@
   "name": "react-materialui-typescript",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Gkanawati.github.io/react-materialui-typescript",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "mock": "json-server -w -p 3333 ./mock/database.json",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",

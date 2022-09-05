@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nomeCompleto": "Gabriel Kanawati",
-      "email": "gabrielkanawati3@gmail.com",
+      "email": "gabrielkanawati@gmail.com",
       "cidadeId": 2
     },
     {
@@ -67,10 +67,16 @@
       "cidadeId": "2"
     },
     {
+      "id": 19,
       "nomeCompleto": "Larissa Kanawati",
-      "email": "larikanawati@gmail.com",
-      "cidadeId": 2,
-      "id": 19
+      "email": "larikati@gmail.com",
+      "cidadeId": 2
+    },
+    {
+      "nomeCompleto": "Juca da Silva",
+      "email": "jucasilva@gmail.com",
+      "cidadeId": 5,
+      "id": 20
     }
   ],
   "cidades": [

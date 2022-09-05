@@ -28,8 +28,8 @@
             "off"
         ],
         "quotes": [
-            "error",
-            "double"
+            "off",
+            "single"
         ],
         "semi": [
             "error",
