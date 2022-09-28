@@ -1,5 +1,5 @@
 <h1 align="center">
-  🔗📺 Plataforma de Cadastro de Usuário e Cidades
+  🔗📺 Sistema de Cadastro de Usuário e Cidades
 </h1>
 
 ## :rocket: Sobre o projeto
