@@ -10,7 +10,7 @@ Esse site envolve o cadastro de pessoas e de cidades em um banco de dados, e tam
 
 Nesse projeto foram utilizadas diversas bibliotecas consolidadas com o seu uso no mercado de trabalho, como por exemplo: Material UI 5, para estilização e criação de componentes seguindo o design system da Google, React Router Dom 6 para a criação das rotas e navegação da plataforma e o Unform para a construção de formulários performáticos. 📚
 
-Todo o site está responsivo e adaptativo nos diversos tamanhos de tela. Também doi adicionado ao projeto a opção de alteração entre os temas claro e escuro da aplicação, utilizando o Material UI. 📱
+Todo o site está responsivo e adaptativo nos diversos tamanhos de tela. Também foi adicionado ao projeto a opção de alteração entre os temas claro e escuro da aplicação, utilizando o Material UI. 📱
 
 A plataforma foi construída utilizando React para a construção do frontend e json-server para a construção das APIs consumidas pela plataforma. Os dados persistidos pelo site são variáveis e recebem todas as informações via localhost da maquina do usuário.
 
